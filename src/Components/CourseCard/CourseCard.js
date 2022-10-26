@@ -3,7 +3,7 @@ import { FaStar, FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const CourseCard = ({ course }) => {
-    const { image_url, price, title, rating } = course;
+    const { image_url, price, title, rating,_id } = course;
     
 
   return (
@@ -18,13 +18,11 @@ const CourseCard = ({ course }) => {
         <dl>
           <div>
             <dt className="sr-only">Price</dt>
-
             <dd className="text-sm text-gray-500">{price}</dd>
           </div>
 
           <div>
             <dt className="sr-only">Title</dt>
-
             <dd className="font-medium">{title}</dd>
           </div>
         </dl>
@@ -37,10 +35,8 @@ const CourseCard = ({ course }) => {
             </div>
           </div>
 
-          <button
-            className="bg-blue-600 py-3 px-6 text-xl text-white rounded-md"
-          >
-            <Link to="/details" className="flex items-center">
+          <button className="bg-blue-600 py-3 px-6 text-xl text-white rounded-md">
+            <Link to={`/course/${_id}`} className="flex items-center">
               Details
               <FaArrowRight className="ml-1" />
             </Link>

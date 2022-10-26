@@ -33,9 +33,10 @@ function App() {
           element: <Blog></Blog>,
         },
         {
-          path: 'details',
-          element: <Details></Details>
-        }
+          path: "/course/:id",
+          element: <Details></Details>,
+          loader: ({ params }) => fetch(`http://localhost:5000/course/${params.id}`),
+        },
       ],
     },
   ]);

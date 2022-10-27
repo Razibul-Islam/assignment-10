@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const SignUp = () => {
-  const {createUser} = useContext(AuthContext)
+  const { createUser, emailVerification, profileUpdate } =
+    useContext(AuthContext);
 
   const handleCreateUser = (event) => {
     event.preventDefault();
@@ -15,17 +16,33 @@ const SignUp = () => {
     const photoURL = form.photoURL.value;
     const email = form.email.value;
     const password = form.password.value;
-    // console.log(name,photoURL,email,password);
 
     createUser(email, password)
-      .then(result => {
+      .then((result) => {
         const user = result.user;
         console.log(user);
+        form.reset();
+        verify();
+        updateUserProfile(name,photoURL)
       })
-      .catch(error => console.error(error))
+      .catch((error) => console.error(error));
+    
+    const verify = () => {
+      emailVerification()
+        .then(() => {})
+        .catch((error) => console.error(error));
+    }
 
-  }
-
+    const updateUserProfile = (name,photoURL) => {
+      const profile = {
+        displayName: name,
+        photoURL: photoURL,
+      };
+      profileUpdate(profile)
+        .then(() => { })
+        .catch(() => { })
+    }
+  };
 
   return (
     <div className="bg-grey-100 min-h-screen flex flex-col">

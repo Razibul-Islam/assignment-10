@@ -1,13 +1,23 @@
 import React from "react";
+import { useContext } from "react";
 import { useState } from "react";
+import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import logo from "../../assest/logo.png";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Navbar = () => {
   const [navbar, setNavbar] = useState(false);
+  const { users, logout } = useContext(AuthContext);
+  // console.log(users);
+  const handlelogout = () => {
+    logout()
+      .then(() => {})
+      .catch((error) => {});
+  };
 
   return (
-    <nav className="w-full bg-purple-500 shadow sticky top-0 pb-3">
+    <nav className="w-full bg-purple-500 shadow sticky top-0 pb-3 z-50">
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:py-5 md:block">
@@ -59,7 +69,7 @@ const Navbar = () => {
               navbar ? "block" : "hidden"
             }`}
           >
-            <div className="flex justify-between">
+            <div className="md:flex md:justify-between block">
               <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
                 <li className="text-gray-700 text-xl pr-4">
                   <Link to="/course">Courses</Link>
@@ -73,18 +83,46 @@ const Navbar = () => {
               </ul>
 
               <div className="mt-3 space-y-2  block">
-                <Link
-                  to="/login"
-                  className="inline-block w-full px-4 py-2 text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
-                >
-                  Sign in
-                </Link>
-                <Link
-                  to="/register"
-                  className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
-                >
-                  Sign up
-                </Link>
+                {!users?.uid ? (
+                  <>
+                    <Link
+                      to="/login"
+                      className="inline-block w-full px-4 py-2 text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-800"
+                    >
+                      Sign in
+                    </Link>
+                    <Link
+                      to="/register"
+                      className="inline-block w-full px-4 py-2 text-center text-gray-800 bg-white rounded-md shadow hover:bg-gray-100"
+                    >
+                      Sign up
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex flex-col-reverse md:flex-row-reverse md:items-center ">
+                      <div className="flex md:flex-row-reverse items-center mt-5 md:mt-0">
+                        <img
+                          src={users?.photoURL ? users?.photoURL : <FaUser />}
+                          className="h-12 rounded-full md:ml-5"
+                          alt=""
+                        />
+                        <div className="md:text-right ml-5 md:ml-0">
+                          <h4 className="text-xl">{users.displayName}</h4>
+                          <h4 className="text-sm">{users.email}</h4>
+                        </div>
+                      </div>
+                      <div className="mr-5">
+                        <button
+                          onClick={handlelogout}
+                          className="py-2 px-3 rounded-md bg-gray-600"
+                        >
+                          Sign Out
+                        </button>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>

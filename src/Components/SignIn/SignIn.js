@@ -1,22 +1,51 @@
-import { GoogleAuthProvider } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import React from "react";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const SignIn = () => {
-    const {googleProviderLogin} = useContext(AuthContext);
-    const Provider = new GoogleAuthProvider();
-    const handleGoogleSignIn = () => {
-        googleProviderLogin(Provider)
-          .then((result) => {
-            const user = result.user;
-            console.log(user);
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-    }
+  const { googleProviderLogin, login, gitHubUpdate } = useContext(AuthContext);
+  const Provider = new GoogleAuthProvider();
+  const githubProvider = new GithubAuthProvider();
+  const handleGoogleSignIn = () => {
+    googleProviderLogin(Provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  const handlegitHubLogin = () => {
+    gitHubUpdate(githubProvider)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch(error => {
+        console.error(error);
+      })
+  }
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    // console.log(email,password);
+
+    login(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        form.reset();
+      })
+      .catch((error) => console.error(error));
+  };
   return (
     <div className="">
       {" "}
@@ -31,7 +60,10 @@ const SignIn = () => {
             {" "}
             <div className="flex items-center justify-center space-x-4 mt-3">
               {" "}
-              <button className="flex items-center py-2 px-4 text-sm uppercase rounded bg-white hover:bg-gray-100 text-indigo-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+              <button
+                onClick={handlegitHubLogin}
+                className="flex items-center py-2 px-4 text-sm uppercase rounded bg-white hover:bg-gray-100 text-indigo-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
+              >
                 {" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -85,13 +117,14 @@ const SignIn = () => {
             {" "}
             Or sign in with credentials{" "}
           </p>{" "}
-          <form className="mt-6">
+          <form onSubmit={handleLogin} className="mt-6">
             {" "}
             <div className="relative">
               {" "}
               <input
                 className="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
                 id="username"
+                name="email"
                 type="email"
                 placeholder="Email"
                 required
@@ -115,6 +148,7 @@ const SignIn = () => {
               <input
                 className="appearance-none border pl-12 border-gray-100 shadow-sm focus:shadow-md focus:placeholder-gray-600  transition  rounded-md w-full py-3 text-gray-600 leading-tight focus:outline-none focus:ring-gray-600 focus:shadow-outline"
                 id="username"
+                name="password"
                 type="password"
                 placeholder="Password"
                 required
@@ -142,7 +176,10 @@ const SignIn = () => {
             <div>
               <p className="text-grey-900 mt-6">
                 New Here?
-                <Link to="/register" className="no-underline hover:underline border-b border-blue text-blue">
+                <Link
+                  to="/register"
+                  className="no-underline hover:underline border-b border-blue text-blue"
+                >
                   Register Now
                 </Link>
               </p>

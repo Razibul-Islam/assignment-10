@@ -1,18 +1,24 @@
 import { GithubAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import React from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const SignIn = () => {
   const { googleProviderLogin, login, gitHubUpdate } = useContext(AuthContext);
   const Provider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location?.state?.from?.pathname || "/";
+
   const handleGoogleSignIn = () => {
     googleProviderLogin(Provider)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.error(error);
@@ -21,14 +27,15 @@ const SignIn = () => {
 
   const handlegitHubLogin = () => {
     gitHubUpdate(githubProvider)
-      .then(result => {
+      .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(from, { replace: true });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
-      })
-  }
+      });
+  };
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -41,8 +48,9 @@ const SignIn = () => {
     login(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
+        // console.log(user);
         form.reset();
+        navigate(from, { replace: true });
       })
       .catch((error) => console.error(error));
   };

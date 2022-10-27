@@ -6,6 +6,8 @@ import Details from "./Components/Details/Details";
 import Error from "./Components/Error/Error";
 import Faq from "./Components/FAQ/Faq";
 import Home from "./Components/Home/Home";
+import Premimum from "./Components/Premimum/Premimum";
+import PrivateRouter from "./Components/PrivateRouter/PrivateRouter";
 import SignIn from "./Components/SignIn/SignIn";
 import SignUp from "./Components/SignUp/SignUp";
 import Layout from "./Layout/Layout";
@@ -32,28 +34,47 @@ function App() {
         },
         {
           path: "/blog",
-          element: <Blog></Blog>,
+          element: (
+            <PrivateRouter>
+              <Blog></Blog>
+            </PrivateRouter>
+          ),
         },
         {
           path: "/course/:id",
-          element: <Details></Details>,
-          loader: ({ params }) => fetch(`http://localhost:5000/course/${params.id}`),
+          element: (
+            <PrivateRouter>
+              <Details></Details>
+            </PrivateRouter>
+          ),
+          loader: ({ params }) =>
+            fetch(`http://localhost:5000/course/${params.id}`),
         },
         {
           path: "/login",
-          element: <SignIn></SignIn>
+          element: <SignIn></SignIn>,
         },
         {
-          path: '/register',
-          element: <SignUp></SignUp>
-        }
+          path: "/register",
+          element: <SignUp></SignUp>,
+        },
+        {
+          path: "/premimum",
+          element: (
+            <PrivateRouter>
+              <Premimum></Premimum>
+            </PrivateRouter>
+          ),
+        },
       ],
     },
   ]);
 
-  return<div>
-    <RouterProvider router={router}></RouterProvider>
-  </div>;
+  return (
+    <div>
+      <RouterProvider router={router}></RouterProvider>
+    </div>
+  );
 }
 
 export default App;

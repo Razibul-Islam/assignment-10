@@ -15,7 +15,7 @@ const Course = () => {
       </div>
       <div className="bg-blue-200 flex justify-center items-center">
         <div className="w-4/5 grid grid-cols-1 md:grid-cols-12">
-          <div className="bg-blue-500 col-span-4 h-[690px] md:sticky top-[100px] p-5 rounded-tl-lg">
+          <div className="bg-blue-500 col-span-4 h-[702px] md:sticky top-[90px] p-5 rounded-tl-lg">
             {courses.map((courseN) => (
               <CourseName key={courseN._id} courseN={courseN}></CourseName>
             ))}

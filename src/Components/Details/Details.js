@@ -1,6 +1,11 @@
 import React from "react";
-import { FaEye, FaStar } from "react-icons/fa";
+import { FaDownload, FaEye, FaStar } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router-dom";
+import Pdf from "react-to-pdf";
+
+
+
+const ref = React.createRef();
 
 const Details = () => {
   const course = useLoaderData();
@@ -37,7 +42,10 @@ const Details = () => {
             </Link>
           </div>
         </div>
-        <div className="bg-white text-black lg:ml-14 max-h-[600px] overflow-auto">
+        <div
+          ref={ref}
+          className="bg-white text-black lg:ml-14 max-h-[600px] overflow-auto"
+        >
           <div class="p-6 space-y-6">
             <div class="text-base leading-relaxed">
               <div className="p-6 sm:p-12 dark:bg-gray-900 dark:text-gray-100 rounded-lg">
@@ -77,8 +85,17 @@ const Details = () => {
                 Total View: <FaEye className="mx-2" />
                 {total_view}
               </p>
+              <p className="flex items-center">
+                <span className="mr-2">Price: {price}</span>
+                <Pdf targetRef={ref} filename="code-example.pdf">
+                  {({ toPdf }) => <FaDownload onClick={toPdf} />}
+                </Pdf>
+              </p>
               <h3 className="text-xl font-semibold">{title}</h3>
-                          <p><strong>Details about { name} programming language: </strong>{details}</p>
+              <p>
+                <strong>Details about {name} programming language: </strong>
+                {details}
+              </p>
             </div>
           </div>
         </div>

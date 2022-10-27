@@ -18,17 +18,21 @@ export const AuthContext = createContext();
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
-  const  [users, setUser]  = useState(null);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true)
 
   const googleProviderLogin = (googleProvider) => {
+    setLoading(true)
     return signInWithPopup(auth, googleProvider);
   };
 
   const createUser = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const login = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
@@ -37,29 +41,47 @@ const AuthProvider = ({ children }) => {
   };
 
   const profileUpdate = (profile) => {
+    setLoading(true);
     return updatePassword(auth.currentUser, profile);
   };
   
   const gitHubUpdate = (githubProvider) => {
+    setLoading(true);
     return signInWithPopup(auth, githubProvider);
   }
 
   const logout = () => {
+    setLoading(true)
     return signOut(auth);
   }
 
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+  //     setUser(currentUser);
+  //     setLoading(false)
+  //     console.log(currentUser);
+  //     console.log(user);
+  //   });
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // })
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      // console.log(currentUser);
-      setUser(currentUser);
-    });
+      setUser(currentUser)
+      setLoading(false)
+    })
     return () => {
-      unsubscribe();
-    };
-  })
+      unsubscribe()
+    }
+  },[])
+
+  
 
   const AuthInfo = {
-    users,
+    user,
+    loading,
     googleProviderLogin,
     createUser,
     login,

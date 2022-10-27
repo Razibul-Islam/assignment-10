@@ -105,12 +105,16 @@ const Navbar = () => {
                           className="group max-w-max relative mx-1 flex flex-col items-center justify-center rounded-full border border-gray-500 p-1 text-gray-500 hover:bg-gray-200 hover:text-gray-600"
                           href="#"
                         >
-                          <img
-                            src={user?.photoURL ? user?.photoURL : <FaUser />}
-                            className="h-12 rounded-full md:ml-5"
-                            alt=""
-                            title={user.displayName}
-                          />
+                          {user?.photoURL ? (
+                            <img
+                              src={user?.photoURL}
+                              className="h-12 rounded-full md:ml-5"
+                              alt=""
+                              title={user.displayName}
+                            />
+                          ) : (
+                            <FaUser className="text-white md:ml-3" />
+                          )}
                           <div className="[transform:perspective(50px)_translateZ(0)_rotateX(10deg)] group-hover:[transform:perspective(0px)_translateZ(0)_rotateX(0deg)] absolute bottom-0 mb-6 origin-bottom transform rounded text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
                             <div className="flex max-w-xs flex-col items-center">
                               <div className="rounded bg-gray-900 p-2 text-xs text-center shadow-lg">

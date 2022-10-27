@@ -8,7 +8,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  updatePassword,
+  updateProfile,
 } from "firebase/auth";
 import app from "../firebase/firebase.config";
 import { useState } from "react";
@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
 
   const profileUpdate = (profile) => {
     setLoading(true);
-    return updatePassword(auth.currentUser, profile);
+    return updateProfile(auth.currentUser, profile);
   };
   
   const gitHubUpdate = (githubProvider) => {
@@ -55,17 +55,7 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   }
 
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-  //     setUser(currentUser);
-  //     setLoading(false)
-  //     console.log(currentUser);
-  //     console.log(user);
-  //   });
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // })
+
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {

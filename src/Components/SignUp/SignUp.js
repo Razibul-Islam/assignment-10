@@ -1,9 +1,10 @@
 import React from "react";
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const { createUser, emailVerification, profileUpdate } =
     useContext(AuthContext);
 
@@ -23,25 +24,27 @@ const SignUp = () => {
         console.log(user);
         form.reset();
         verify();
-        updateUserProfile(name,photoURL)
+        updateUserProfile(name, photoURL);
+        navigate("/");
       })
       .catch((error) => console.error(error));
-    
+
     const verify = () => {
       emailVerification()
         .then(() => {})
         .catch((error) => console.error(error));
-    }
+    };
 
-    const updateUserProfile = (name,photoURL) => {
+    const updateUserProfile = (name, photoURL) => {
       const profile = {
         displayName: name,
         photoURL: photoURL,
-      };
+      }
+      console.log(profile);
       profileUpdate(profile)
-        .then(() => { })
-        .catch(() => { })
-    }
+        .then(() => {})
+        .catch(() => {})
+    };
   };
 
   return (

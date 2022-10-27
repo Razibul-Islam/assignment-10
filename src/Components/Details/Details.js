@@ -3,8 +3,6 @@ import { FaDownload, FaEye, FaStar } from "react-icons/fa";
 import { Link, useLoaderData } from "react-router-dom";
 import Pdf from "react-to-pdf";
 
-
-
 const ref = React.createRef();
 
 const Details = () => {
@@ -22,21 +20,21 @@ const Details = () => {
     Instructor,
   } = course;
   return (
-    <section class="relative bg-blue-400">
-      <div class="absolute inset-0 bg-white/75 sm:bg-transparent sm:bg-gradient-to-r sm:from-white/95 sm:to-white/25"></div>
+    <section className="relative bg-blue-400">
+      <div className="absolute inset-0 bg-white/75 sm:bg-transparent sm:bg-gradient-to-r sm:from-white/95 sm:to-white/25"></div>
 
-      <div class="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
-        <div class="max-w-xl text-center sm:text-left">
-          <h1 class="text-3xl font-extrabold sm:text-5xl">
+      <div className="relative mx-auto max-w-screen-xl px-4 py-32 sm:px-6 lg:flex lg:h-screen lg:items-center lg:px-8">
+        <div className="max-w-xl text-center sm:text-left">
+          <h1 className="text-3xl font-extrabold sm:text-5xl">
             {name} Programming Language
           </h1>
 
-          <p class="mt-4 max-w-lg sm:text-xl sm:leading-relaxed">{title}</p>
+          <p className="mt-4 max-w-lg sm:text-xl sm:leading-relaxed">{title}</p>
 
-          <div class="mt-8 flex flex-wrap gap-4 text-center">
+          <div className="mt-8 flex flex-wrap gap-4 text-center">
             <Link
               to="buy"
-              class="block w-full rounded bg-rose-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-rose-700 focus:outline-none focus:ring active:bg-rose-500 sm:w-auto"
+              className="block w-full rounded bg-rose-600 px-12 py-3 text-sm font-medium text-white shadow hover:bg-rose-700 focus:outline-none focus:ring active:bg-rose-500 sm:w-auto"
             >
               Buy for {price}
             </Link>
@@ -46,8 +44,8 @@ const Details = () => {
           ref={ref}
           className="bg-white text-black lg:ml-14 max-h-[600px] overflow-auto"
         >
-          <div class="p-6 space-y-6">
-            <div class="text-base leading-relaxed">
+          <div className="p-6 space-y-6">
+            <div className="text-base leading-relaxed">
               <div className="p-6 sm:p-12 dark:bg-gray-900 dark:text-gray-100 rounded-lg">
                 <div className="flex flex-col space-y-4 md:space-y-0 md:space-x-6 md:flex-row">
                   <img
@@ -73,7 +71,7 @@ const Details = () => {
                 </div>
               </div>
             </div>
-            <div class="text-base leading-relaxed">
+            <div className="text-base leading-relaxed">
               <img src={image_url} className="h-48" alt="" />
               <p className="flex items-center">
                 <span className="flex items-center">

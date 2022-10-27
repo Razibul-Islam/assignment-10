@@ -17,15 +17,15 @@ const SignIn = () => {
     googleProviderLogin(Provider)
       .then((result) => {
         const user = result.user;
-        console.log(user);
         navigate(from, { replace: true });
+        console.log(user);
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
-  const handlegitHubLogin = () => {
+  const handleGitHubLogin = () => {
     gitHubUpdate(githubProvider)
       .then((result) => {
         const user = result.user;
@@ -48,7 +48,7 @@ const SignIn = () => {
     login(email, password)
       .then((result) => {
         const user = result.user;
-        // console.log(user);
+        console.log(user);
         form.reset();
         navigate(from, { replace: true });
       })
@@ -69,7 +69,7 @@ const SignIn = () => {
             <div className="flex items-center justify-center space-x-4 mt-3">
               {" "}
               <button
-                onClick={handlegitHubLogin}
+                onClick={handleGitHubLogin}
                 className="flex items-center py-2 px-4 text-sm uppercase rounded bg-white hover:bg-gray-100 text-indigo-500 border border-transparent hover:border-transparent hover:text-gray-700 shadow-md hover:shadow-lg font-medium transition transform hover:-translate-y-0.5"
               >
                 {" "}

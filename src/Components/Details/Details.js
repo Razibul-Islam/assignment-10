@@ -14,7 +14,6 @@ const Details = () => {
     seller,
     title,
     total_view,
-    _id,
     Instructor,
   } = course;
   return (

@@ -6,6 +6,7 @@ import Details from "./Components/Details/Details";
 import Error from "./Components/Error/Error";
 import Faq from "./Components/FAQ/Faq";
 import Home from "./Components/Home/Home";
+import SignIn from "./Components/SignIn/SignIn";
 import Layout from "./Layout/Layout";
 
 function App() {
@@ -37,6 +38,10 @@ function App() {
           element: <Details></Details>,
           loader: ({ params }) => fetch(`http://localhost:5000/course/${params.id}`),
         },
+        {
+          path: "/login",
+          element: <SignIn></SignIn>
+        }
       ],
     },
   ]);

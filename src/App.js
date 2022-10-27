@@ -7,6 +7,7 @@ import Error from "./Components/Error/Error";
 import Faq from "./Components/FAQ/Faq";
 import Home from "./Components/Home/Home";
 import SignIn from "./Components/SignIn/SignIn";
+import SignUp from "./Components/SignUp/SignUp";
 import Layout from "./Layout/Layout";
 
 function App() {
@@ -41,6 +42,10 @@ function App() {
         {
           path: "/login",
           element: <SignIn></SignIn>
+        },
+        {
+          path: '/register',
+          element: <SignUp></SignUp>
         }
       ],
     },

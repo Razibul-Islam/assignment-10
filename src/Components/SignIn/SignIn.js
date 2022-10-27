@@ -1,6 +1,7 @@
 import { GoogleAuthProvider } from "firebase/auth";
 import React from "react";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const SignIn = () => {
@@ -131,16 +132,6 @@ const SignIn = () => {
                 </svg>{" "}
               </div>{" "}
             </div>{" "}
-            <div className="mt-4 flex items-center text-gray-500">
-              {" "}
-              <input
-                type="checkbox"
-                id="remember"
-                name="remember"
-                className="mr-3"
-              />{" "}
-              <label htmlFor="remember">Remember me</label>{" "}
-            </div>{" "}
             <div className="flex items-center justify-center mt-8">
               {" "}
               <button className="text-white py-2 px-4 uppercase rounded bg-indigo-500 hover:bg-indigo-600 shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
@@ -148,6 +139,14 @@ const SignIn = () => {
                 Sign in{" "}
               </button>{" "}
             </div>{" "}
+            <div>
+              <p className="text-grey-900 mt-6">
+                New Here?
+                <Link to="/register" className="no-underline hover:underline border-b border-blue text-blue">
+                  Register Now
+                </Link>
+              </p>
+            </div>
           </form>{" "}
         </div>{" "}
       </div>

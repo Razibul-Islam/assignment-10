@@ -3,6 +3,11 @@ import React from "react";
 import { useContext } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { useState } from "react";
+
+
+
+
 
 const SignIn = () => {
   const { googleProviderLogin, login, gitHubUpdate } = useContext(AuthContext);
@@ -10,6 +15,7 @@ const SignIn = () => {
   const githubProvider = new GithubAuthProvider();
   const navigate = useNavigate();
   const location = useLocation();
+  const [error, setError] = useState('');
 
   const from = location?.state?.from?.pathname || "/";
 
@@ -21,7 +27,7 @@ const SignIn = () => {
         console.log(user);
       })
       .catch((error) => {
-        console.error(error);
+        setError(error.message);
       });
   };
 
@@ -33,7 +39,7 @@ const SignIn = () => {
         navigate(from, { replace: true });
       })
       .catch((error) => {
-        console.error(error);
+        setError(error.message);
       });
   };
 
@@ -52,7 +58,7 @@ const SignIn = () => {
         form.reset();
         navigate(from, { replace: true });
       })
-      .catch((error) => console.error(error));
+      .catch((error) => setError(error.code));
   };
   return (
     <div className="">
@@ -126,7 +132,7 @@ const SignIn = () => {
             Or sign in with credentials{" "}
           </p>{" "}
           <form onSubmit={handleLogin} className="mt-6">
-            {" "}
+            <p>{error}</p>{" "}
             <div className="relative">
               {" "}
               <input

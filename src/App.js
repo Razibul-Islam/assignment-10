@@ -6,7 +6,7 @@ import Details from "./Components/Details/Details";
 import Error from "./Components/Error/Error";
 import Faq from "./Components/FAQ/Faq";
 import Home from "./Components/Home/Home";
-import premium from "./Components/Premium/Premium";
+import Premium from "./Components/Premium/Premium";
 import PrivateRouter from "./Components/PrivateRouter/PrivateRouter";
 import SignIn from "./Components/SignIn/SignIn";
 import SignUp from "./Components/SignUp/SignUp";
@@ -62,7 +62,7 @@ function App() {
           path: "/premium",
           element: (
             <PrivateRouter>
-              <premium></premium>
+              <Premium></Premium>
             </PrivateRouter>
           ),
         },

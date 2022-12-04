@@ -26,7 +26,7 @@ function App() {
         {
           path: "/course",
           element: <Course></Course>,
-          loader: () => fetch(`http://localhost:5000/course`),
+          loader: () => fetch(`https://tech-density.vercel.app/course`),
         },
         {
           path: "/faq",
@@ -48,7 +48,7 @@ function App() {
             </PrivateRouter>
           ),
           loader: ({ params }) =>
-            fetch(`http://localhost:5000/course/${params.id}`),
+            fetch(`https://tech-density.vercel.app/course/${params.id}`),
         },
         {
           path: "/login",
